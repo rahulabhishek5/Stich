@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EduVision - Smart Attendance System</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=container-queries"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/teacher.js"></script>
+    <script type="module" src="js/student.js"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "secondary": "#808080",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <div class="relative flex min-h-screen w-full flex-col">
+        <header
+            class="top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 48 48"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                            <path clip-rule="evenodd"
+                                d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">EduVision</h2>
+                    </div>
+                    <!-- <nav class="hidden md:flex items-center gap-8">
+                        <a class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors"
+                            href="#">Features</a>
+                        <a class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors"
+                            href="#">How it works</a>
+                        <a class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors"
+                            href="#">Pricing</a>
+                        <a class="text-sm font-medium hover:text-primary dark:hover:text-primary transition-colors"
+                            href="#">Contact</a>
+                    </nav> -->
+                    <!-- <button
+                        class="hidden md:flex items-center justify-center rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-all">
+                        Get Started
+                    </button> -->
+                </div>
+            </div>
+        </header>
+        <main class="flex-grow">
+            <section class="relative">
+                <div class="absolute inset-0 bg-background-dark/100 dark:bg-background-dark/80"></div>
+                <div class="relative container mx-auto px-6 py-24 md:py-32 lg:py-40 text-center text-white">
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">
+                        Smart Attendance <div class="text-primary">System</div>
+                    </h1>
+                    <p class="max-w-3xl mx-auto text-base md:text-lg text-gray-200 dark:text-gray-300 mb-8">
+                        Automated attendance tracking for rural schools using QR codes, GPS verification, and
+                        offline-first technology. Secure, reliable, and easy to use.
+                    </p>
+                    <div>
+                        <a href="/teacher-login.html">
+                            <button
+                                class="inline-flex items-center justify-center rounded-lg h-12 px-6 mx-2 bg-primary text-white text-base font-bold shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105">
+                                Teacher login
+                            </button>
+                        </a>
+                        <a href="/student-attendance.html">
+                            <button
+                                class="inline-flex items-center justify-center rounded-lg h-12 px-6 mx-2 bg-secondary text-white text-base font-bold shadow-lg hover:bg-secondary/90 transition-all transform hover:scale-105">
+                                Student Check-In
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="py-20 bg-background-light dark:bg-background-dark" id="features">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Key Features</h2>
+                        <p class="mt-4 text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                            Our system offers a range of features designed to streamline attendance management and
+                            improve accuracy.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div
+                            class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
+                            <div
+                                class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4">
+                                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm0,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48ZM200,40H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-64,72V144a8,8,0,0,1,16,0v32a8,8,0,0,1-16,0Zm80-16a8,8,0,0,1-8,8H184v40a8,8,0,0,1-8,8H144a8,8,0,0,1,0-16h24V144a8,8,0,0,1,16,0v8h24A8,8,0,0,1,216,160Zm0,32v16a8,8,0,0,1-16,0V192a8,8,0,0,1,16,0Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">QR Code Generation</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Generate unique QR codes for each
+                                student for quick and secure attendance marking.</p>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
+                            <div
+                                class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4">
+                                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8Zm-48,48a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,224Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Real-time Dashboard</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Monitor attendance in real-time with an
+                                intuitive dashboard, providing instant insights.</p>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
+                            <div
+                                class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4">
+                                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">GPS Verification</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Verify student locations using GPS
+                                technology to ensure accurate attendance records.</p>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
+                            <div
+                                class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4">
+                                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M160,40A88.09,88.09,0,0,0,81.29,88.67,64,64,0,1,0,72,216h88a88,88,0,0,0,0-176Zm0,160H72a48,48,0,0,1,0-96c1.1,0,2.2,0,3.29.11A88,88,0,0,0,72,128a8,8,0,0,0,16,0,72,72,0,1,1,72,72Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Offline Support</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Continue tracking attendance even
+                                without an internet connection, with automatic synchronization when online.</p>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
+                            <div
+                                class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4">
+                                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Automated Reports</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Generate detailed attendance reports
+                                automatically, saving time and reducing manual effort.</p>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-800">
+                            <div
+                                class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4">
+                                <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Data Analytics</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Analyze attendance data to identify
+                                trends, patterns, and areas for improvement.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-20 bg-white dark:bg-background-dark/50" id="how-it-works">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">How It Works</h2>
+                        <p class="mt-4 text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                            A simple three-step process to get you up and running with our smart attendance system.
+                        </p>
+                    </div>
+                    <div class="max-w-3xl mx-auto">
+                        <div class="relative">
+                            <div aria-hidden="true"
+                                class="absolute left-6 top-6 h-full w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+                            <div class="relative flex items-start gap-6 mb-12">
+                                <div
+                                    class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white z-10">
+                                    <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm0,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48ZM200,40H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-64,72V144a8,8,0,0,1,16,0v32a8,8,0,0,1-16,0Zm80-16a8,8,0,0,1-8,8H184v40a8,8,0,0,1-8,8H144a8,8,0,0,1,0-16h24V144a8,8,0,0,1,16,0v8h24A8,8,0,0,1,216,160Zm0,32v16a8,8,0,0,1-16,0V192a8,8,0,0,1,16,0Z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Student Check-In</h3>
+                                    <p class="mt-1 text-base text-gray-600 dark:text-gray-400">Students scan their
+                                        unique QR codes using a mobile app or designated device.</p>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start gap-6 mb-12">
+                                <div
+                                    class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white z-10">
+                                    <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8Zm-48,48a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,224Z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Attendance Tracking</h3>
+                                    <p class="mt-1 text-base text-gray-600 dark:text-gray-400">The system tracks
+                                        attendance in real-time, providing instant updates and notifications.</p>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start gap-6">
+                                <div
+                                    class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-primary text-white z-10">
+                                    <svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Reporting &amp;
+                                        Analytics</h3>
+                                    <p class="mt-1 text-base text-gray-600 dark:text-gray-400">Generate detailed reports
+                                        and analyze attendance data to gain insights and improve management.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="bg-white dark:bg-background-dark/50 border-t border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center gap-3 mb-6 md:mb-0">
+                        <svg class="h-6 w-6 text-primary" fill="none" viewBox="0 0 48 48"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                            <path clip-rule="evenodd"
+                                d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-lg font-bold text-gray-900 dark:text-white">EduTrack</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>
