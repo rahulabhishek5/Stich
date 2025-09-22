@@ -1,30 +1,23 @@
-// frontend/js/api.js
+// Import the 'auth' object from your firebase.js file.
+// This is crucial for the new syntax to work.
+import { auth } from './firebase.js';
 
-// The address of your running FastAPI backend
-const API_BASE_URL = 'http://127.0.0.1:8000';
-
-/**
- * This function attempts to call the protected /checkin endpoint on the backend.
- */
+// This is the main function to call the backend.
 async function performCheckIn() {
-    const user = firebase.auth().currentUser;
+    // USE the imported 'auth' object, NOT firebase.auth()
+    const user = auth.currentUser; 
 
-    // 1. Check if a user is actually logged in.
     if (!user) {
         alert("You must be logged in to check in!");
         return;
     }
 
     try {
-        // 2. Get the Firebase ID token. This is the user's "ID card".
         const idToken = await user.getIdToken();
-
-        // 3. Make the request to the backend.
-        //    The most important part is the 'headers' section, where we include the token.
-        const response = await fetch(`${API_BASE_URL}/checkin`, {
+        const response = await fetch('http://127.0.0.1:8000/checkin', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${idToken}`, // This is the bridge!
+                'Authorization': `Bearer ${idToken}`,
                 'Content-Type': 'application/json',
             },
         });
@@ -32,14 +25,19 @@ async function performCheckIn() {
         const data = await response.json();
 
         if (!response.ok) {
-            // If the backend returns an error (like 401 Unauthorized), show it.
             alert(`Error: ${data.detail || 'Check-in failed.'}`);
         } else {
-            // If successful, show the success message from the backend.
             alert(`Success: ${data.message}`);
         }
     } catch (error) {
         console.error("Failed to communicate with the backend:", error);
         alert("An error occurred. Could not reach the server.");
     }
+}
+
+// Find the button by its ID and attach the function to its click event.
+// This code runs after the page loads.
+const checkInButton = document.getElementById('checkin-btn');
+if (checkInButton) {
+    checkInButton.addEventListener('click', performCheckIn);
 }

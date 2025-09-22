@@ -1,5 +1,5 @@
 // firebase.js
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "../firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 
 // Your web app's Firebase configuration
