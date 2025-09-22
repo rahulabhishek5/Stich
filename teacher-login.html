@@ -67,60 +67,41 @@
                     <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400"> Sign in to continue to your
                         dashboard </p>
                 </div>
-                <form action="#" class="mt-8 space-y-6" method="POST">
+
+                <div id="error-message"
+                    class="hidden text-center text-sm text-red-500 p-2 bg-red-100 dark:bg-red-900/20 rounded-lg"></div>
+
+                <form id="teacher-login-form" class="mt-8 space-y-6">
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div>
-                            <label class="sr-only" for="email-address">Enter School/college ID</label>
-                            <input autocomplete="email"
-                                class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-t-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                id="school-id" name="schoolId" placeholder="School/College ID" required="" type="text" />
-                        </div>
-                        <div>
                             <label class="sr-only" for="email-address">Email address</label>
-                            <input autocomplete="email"
-                                class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                id="email-address" name="email" placeholder="Email address" required="" type="email" />
+                            <input id="email-address" name="username" type="email" autocomplete="email" required
+                                class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-t-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                                placeholder="Email address" />
                         </div>
                         <div>
                             <label class="sr-only" for="password">Password</label>
-                            <input autocomplete="current-password"
+                            <input id="password" name="password" type="password" autocomplete="current-password"
+                                required
                                 class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-b-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                id="password" name="password" placeholder="Password" required="" type="password" />
+                                placeholder="Password" />
                         </div>
                     </div>
+
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
-                            <input
-                                class="h-4 w-4 text-primary bg-background-light dark:bg-background-dark border-primary/40 focus:ring-primary rounded"
-                                id="remember-me" name="remember-me" type="checkbox" />
-                            <label class="ml-2 block text-sm text-gray-900 dark:text-gray-300" for="remember-me">
+                            <input id="remember-me" name="remember-me" type="checkbox"
+                                class="h-4 w-4 text-primary bg-background-light dark:bg-background-dark border-primary/40 focus:ring-primary rounded" />
+                            <label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
                                 Remember me </label>
                         </div>
-                        <div class="text-sm">
-                            <!-- <a class="font-medium text-primary hover:text-primary/80" href="#"> Forgot your password?
-                            </a> -->
-                        </div>
                     </div>
+
                     <div class="space-y-4">
-                        <button
-                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary"
-                            type="submit"> Login </button>
-                        <!-- Login with Google -->
-                            <!-- <button
-                            class="group relative w-full flex justify-center items-center py-3 px-4 border border-gray-300 dark:border-gray-500 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary"
-                            type="button">
-                            <svg aria-hidden="true" class="w-5 h-5 mr-2" data-icon="google" data-prefix="fab"
-                                focusable="false" role="img" viewBox="0 0 488 512" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M488 261.8C488 403.3 381.5 512 244 512 110.3 512 0 401.7 0 265.2 0 128.5 110.3 19.2 244 19.2c71.2 0 131.3 29.2 174.5 73.5l-68.5 66.6C314.5 125.7 282.8 112 244 112c-88.6 0-160.2 71.5-160.2 159.2s71.6 159.2 160.2 159.2c101.4 0 132.8-77.9 138.8-118.2H244v-87.3h236.1c2.3 12.7 3.9 26.2 3.9 41.7z"
-                                    fill="currentColor"></path>
-                            </svg>
-                            Login with Google
-                        </button> -->
+                        <button type="submit"
+                            class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary">
+                            Login </button>
                     </div>
-                    <!-- <p class="text-center text-sm text-gray-600 dark:text-gray-400"> Don't have an account? <a
-                            class="font-medium text-primary hover:text-primary/80" href="#"> Sign up </a>
-                    </p> -->
                 </form>
             </div>
         </main>
@@ -134,3 +115,69 @@
 </body>
 
 </html>
+<!-- <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div
+        class="w-full max-w-md space-y-8 bg-background-light dark:bg-background-dark p-10 rounded-xl shadow-lg">
+        <div>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white"> Welcome Back,
+                Teacher </h2>
+            <p class="mt-2 text-center text-sm text-gray-600 dark:text-gray-400"> Sign in to continue to your
+                dashboard </p>
+        </div>
+        <form action="#" class="mt-8 space-y-6" method="POST">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <label class="sr-only" for="email-address">Enter School/college ID</label>
+                    <input autocomplete="email"
+                        class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-t-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        id="school-id" name="schoolId" placeholder="School/College ID" required="" type="text" />
+                </div>
+                <div>
+                    <label class="sr-only" for="email-address">Email address</label>
+                    <input autocomplete="email"
+                        class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        id="email-address" name="email" placeholder="Email address" required="" type="email" />
+                </div>
+                <div>
+                    <label class="sr-only" for="password">Password</label>
+                    <input autocomplete="current-password"
+                        class="appearance-none rounded-none relative block w-full px-3 py-3 border border-primary/20 bg-background-light dark:bg-background-dark placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-b-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        id="password" name="password" placeholder="Password" required="" type="password" />
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input
+                        class="h-4 w-4 text-primary bg-background-light dark:bg-background-dark border-primary/40 focus:ring-primary rounded"
+                        id="remember-me" name="remember-me" type="checkbox" />
+                    <label class="ml-2 block text-sm text-gray-900 dark:text-gray-300" for="remember-me">
+                        Remember me </label>
+                </div>
+                <div class="text-sm">
+                    <!-- <a class="font-medium text-primary hover:text-primary/80" href="#"> Forgot your password?
+                    </a> -->
+</div>
+</div>
+<div class="space-y-4">
+    <button
+        class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary"
+        type="submit"> Login </button>
+    <!-- Login with Google -->
+    <!-- <button
+                    class="group relative w-full flex justify-center items-center py-3 px-4 border border-gray-300 dark:border-gray-500 text-sm font-medium rounded-lg text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary"
+                    type="button">
+                    <svg aria-hidden="true" class="w-5 h-5 mr-2" data-icon="google" data-prefix="fab"
+                        focusable="false" role="img" viewBox="0 0 488 512" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M488 261.8C488 403.3 381.5 512 244 512 110.3 512 0 401.7 0 265.2 0 128.5 110.3 19.2 244 19.2c71.2 0 131.3 29.2 174.5 73.5l-68.5 66.6C314.5 125.7 282.8 112 244 112c-88.6 0-160.2 71.5-160.2 159.2s71.6 159.2 160.2 159.2c101.4 0 132.8-77.9 138.8-118.2H244v-87.3h236.1c2.3 12.7 3.9 26.2 3.9 41.7z"
+                            fill="currentColor"></path>
+                    </svg>
+                    Login with Google
+                </button> -->
+</div>
+<!-- <p class="text-center text-sm text-gray-600 dark:text-gray-400"> Don't have an account? <a
+                    class="font-medium text-primary hover:text-primary/80" href="#"> Sign up </a>
+            </p> -->
+</form>
+</div>
+</main> -->

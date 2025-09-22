@@ -1,59 +1,66 @@
-// Import the tools you need from YOUR firebase.js file
-import { auth, provider, signInWithPopup, onAuthStateChanged, signOut } from './firebase.js';
+// This function runs when the HTML page is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Find the login form and the error message container in the HTML
+    const loginForm = document.getElementById('teacher-login-form');
+    const errorMessageDiv = document.getElementById('error-message');
 
-// --- Login Logic ---
-async function handleLogin() {
-    try {
-        const result = await signInWithPopup(auth, provider);
-        console.log("Login successful:", result.user);
-        window.location.href = 'student-dashboard.html'; // Redirect on success
-    } catch (error) {
-        console.error("Login failed:", error);
-    }
-}
+    // Make sure the form actually exists before we try to use it
+    if (loginForm) {
+        // Listen for the 'submit' event on the form
+        loginForm.addEventListener('submit', async (event) => {
+            // Stop the form from doing its default behavior (reloading the page)
+            event.preventDefault();
 
-// --- Logout Logic ---
-async function handleLogout() {
-    try {
-        await signOut(auth);
-        console.log("Logout successful");
-        window.location.href = 'login.html'; // Redirect to login page
-    } catch (error) {
-        console.error("Logout failed:", error);
-    }
-}
+            // Clear any old error messages and hide the error div
+            errorMessageDiv.textContent = '';
+            errorMessageDiv.classList.add('hidden');
 
-// --- Authentication State Observer ---
-// This checks if the user is already logged in or not
-onAuthStateChanged(auth, (user) => {
-    const currentPage = window.location.pathname.split('/').pop();
+            // Get the form data (email and password)
+            const formData = new FormData(loginForm);
 
-    if (user) {
-        // User is signed in.
-        console.log("User is logged in:", user.email);
-        // If they are on the login page, redirect them to the dashboard.
-        if (currentPage === 'login.html' || currentPage === 'index.html') {
-            window.location.href = 'student-dashboard.html';
-        }
-    } else {
-        // User is signed out.
-        console.log("User is not logged in.");
-        // If they are on a protected page (like the dashboard), redirect them to login.
-        if (currentPage === 'student-dashboard.html') {
-            window.location.href = 'login.html';
-        }
+            // The backend's /token endpoint needs the data in a specific format
+            // called 'x-www-form-urlencoded', so we convert it here.
+            const data = new URLSearchParams();
+            for (const pair of formData) {
+                // We only need username and password for login
+                if (pair[0] === 'username' || pair[0] === 'password') {
+                    data.append(pair[0], pair[1]);
+                }
+            }
+
+            try {
+                // Send the login request to the backend API using fetch()
+                const response = await fetch('http://127.0.0.1:8000/token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: data,
+                });
+
+                // Get the JSON data from the backend's response
+                const result = await response.json();
+
+                // If the response was successful (HTTP status 200-299)
+                if (response.ok) {
+                    // Login successful!
+                    // Store the access token in the browser's local storage for future use
+                    localStorage.setItem('accessToken', result.access_token);
+                    
+                    // Redirect the user to the teacher dashboard
+                    // Make sure you have a teacher-dashboard.html file
+                    window.location.href = '/teacher-dashboard.html';
+                } else {
+                    // If there was an error, display the message from the backend
+                    errorMessageDiv.textContent = result.detail || 'An unknown error occurred.';
+                    errorMessageDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                // If there was a network error (e.g., backend is not running)
+                errorMessageDiv.textContent = 'Could not connect to the server. Please try again later.';
+                errorMessageDiv.classList.remove('hidden');
+                console.error('Login Error:', error);
+            }
+        });
     }
 });
-
-// --- Attach Event Listeners ---
-// Find the login button on the login page and attach the login function
-const loginButton = document.getElementById('login-btn');
-if (loginButton) {
-    loginButton.addEventListener('click', handleLogin);
-}
-
-// Find the logout button on the dashboard and attach the logout function
-const logoutButton = document.getElementById('logout-btn');
-if (logoutButton) {
-    logoutButton.addEventListener('click', handleLogout);
-}
