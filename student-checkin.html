@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-checkin</title>
+</head>
+<body>
+    <h2 class="text-2xl font-bold mb-4">Scan QR to Mark Attendance</h2>
+<div id="reader" class="w-80 h-80"></div>
+<p id="result" class="mt-4 text-gray-700"></p>
+
+<!-- html5-qrcode library -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+  function onScanSuccess(decodedText) {
+    document.getElementById("result").innerText = "Scanned: " + decodedText;
+
+    const qrData = JSON.parse(decodedText);
+    const now = Date.now();
+
+    if (now > qrData.expires) {
+      alert("QR code expired!");
+      return;
+    }
+
+    // Send check-in to backend (FastAPI)
+    fetch("http://127.0.0.1:8000/api/checkin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        classCode: qrData.classCode,
+        session: qrData.session,
+        student: "STUDENT_ID_123" // replace with logged-in student info
+      })
+    }).then(res => console.log("Check-in:", res));
+  }
+
+  const html5QrcodeScanner = new Html5QrcodeScanner("reader", {
+    fps: 10,
+    qrbox: 250
+  });
+  html5QrcodeScanner.render(onScanSuccess);
+</script>
+
+</body>
+</html>

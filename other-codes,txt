@@ -1,0 +1,28 @@
+# all below code in main.py in backend
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+sessions = {}  # temporary store
+
+class SessionData(BaseModel):
+    classCode: str
+    session: int
+    expires: int
+
+class CheckinData(BaseModel):
+    classCode: str
+    session: int
+    student: str
+
+@app.post("/api/save-session")
+def save_session(data: SessionData):
+    sessions[data.session] = data.dict()
+    return {"message": "Session saved"}
+
+@app.post("/api/checkin")
+def checkin(data: CheckinData):
+    if data.session not in sessions:
+        return {"error": "Invalid session"}
+    return {"message": f"Check-in success for {data.student}"}

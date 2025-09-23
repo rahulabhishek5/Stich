@@ -224,7 +224,41 @@
     <script type="module" src="js/student.js"></script>\
     <script type="module" src="js/firebase.js"></script>
     <script type="module" src="js/api.js"></script>
+    <!-- QRCode.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
+    <script>
+        const qrBtn = document.querySelector("button"); // your "Generate QR Code" button
+        const qrContainer = document.createElement("div");
+        qrContainer.id = "qrcode";
+        document.body.appendChild(qrContainer);
+
+        qrBtn.addEventListener("click", () => {
+            const classCode = document.getElementById("class-code").value;
+            const timestamp = Date.now();
+
+            // Data that will be embedded into QR (class + session + expiry)
+            const qrData = JSON.stringify({
+                classCode: classCode,
+                session: timestamp,
+                expires: timestamp + 10 * 60 * 1000 // valid 10 minutes
+            });
+
+            qrContainer.innerHTML = ""; // reset
+            new QRCode(qrContainer, {
+                text: qrData,
+                width: 200,
+                height: 200
+            });
+
+            // Send to backend (FastAPI) so student check-ins can be validated
+            fetch("http://127.0.0.1:8000/api/save-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: qrData
+            }).then(res => console.log("Session saved:", res));
+        });
+    </script>
 </body>
 
 </html>
